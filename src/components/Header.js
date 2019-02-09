@@ -7,7 +7,7 @@ import BreadCrumb from './BreadCrumb';
 const Header = () => (
 	<header className="App-header">
 		<Link to="/">
-			<img className="App-logo" src={'assets/images/oknesset-logo.png'}/>
+			<img className="App-logo" src={'assets/images/oknesset-logo.png'} alt=""/>
 		</Link>
 
 		<span className="title">כנסת פתוחה</span>
