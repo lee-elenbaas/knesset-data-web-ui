@@ -1,18 +1,19 @@
-import {compose, createStore, applyMiddleware} from 'redux';
+import {applyMiddleware, createStore} from 'redux';
+import {composeWithDevTools} from 'redux-devtools-extension';
 import {createBrowserHistory} from 'history'
 import {routerMiddleware} from 'connected-react-router'
-import {dataMiddleware} from './middlewares/data.middleware'
+import {dataMiddlewares} from './middlewares/data.middleware'
 import {apiMiddleware} from './middlewares/api.middleware'
 import createRootReducer from './rootReducer';
 
 export const history = createBrowserHistory();
 const store = createStore(
-  createRootReducer(history), // new root reducer with router state
-  compose(
+  createRootReducer(history), // root reducer with router state
+  composeWithDevTools(
     applyMiddleware(
       routerMiddleware(history), // for dispatching history actions
-      dataMiddleware, // for dispatching apiRequest by route
-      apiMiddleware   // for fetching data
+      ...dataMiddlewares, 			// for dispatching data get and data conversion
+      apiMiddleware   					// for fetching data by API
     ),
   ),
 );
